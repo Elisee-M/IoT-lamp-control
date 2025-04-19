@@ -1,0 +1,111 @@
+/* Reset some basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body with a clean, modern gradient background */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Light pastel gradient */
+    height: 100vh;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Create a container with the border to simulate fieldset */
+.container {
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    border: 2px solid #5c6bc0; /* Border to simulate fieldset */
+    border-radius: 15px;
+    position: relative;
+    background-color: #d0dee1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect on the container */
+.container:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+/* Title and image container */
+.title-container {
+    display: flex;
+    align-items: center; /* Vertically align title and image */
+    justify-content: center; /* Center the content */
+    margin-bottom: 20px;
+}
+
+/* Image styling */
+.title-container img {
+    width: 50px; /* Set image width */
+    height: 50px; /* Set image height */
+    margin-right: 15px; /* Space between image and title */
+    border-radius: 50%; /* Make the image circular */
+}
+
+/* Heading */
+h1 {
+    font-size: 2.5em;
+    color: #4e4e4e;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* Subscription status */
+#subscriptionStatus {
+    font-size: 1.2em;
+    color: #777;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* Lamp state display */
+#lampStateDisplay {
+    font-size: 1.5em;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+/* Button Styling */
+button {
+    background-color: #5c6bc0; /* Soft blue color */
+    border: none;
+    color: white;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease-in-out;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+/* Hover effect for buttons */
+button:hover {
+    background-color: #3f51b5; /* Darker blue on hover */
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional small button */
+button:first-of-type {
+    margin-left: 0;
+}
+
+/* Footer / Note (optional) */
+footer {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 50px;
+}
