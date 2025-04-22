@@ -1,42 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IoT Lamp Control</title>
-    <link rel="icon" href="image.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
-    <!-- Firebase SDKs MUST be loaded first -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <!-- Our Firebase control script -->
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | Crazy Lamp Control</title>
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="title-container">
-            <img src="image.png" alt="Lamp Icon">
-            <h1>IoT Lamp Control</h1>
-        </div>
-        <p id="subscriptionStatus">Initializing connection...</p>
-        <p id="lampStateDisplay">Lamp State: --</p>
-        <div>
-            <!-- Changed to add disabled state initially -->
-            <button id="btnOn" onclick="controlLamp('ON')" disabled>Turn ON</button>
-            <button id="btnOff" onclick="controlLamp('OFF')" disabled>Turn OFF</button>
-        </div>
-        <br>
-        <h4>By Elisee (eliseemugiraneza1@gmail.com)</h4>
-        <footer>Built with ❤️ for IoT lovers!</footer>
-    </div>
+  <!-- 🌌 Floating Emojis Background -->
+  <div class="emoji-bg">
+    <span>💡</span>
+    <span>🚀</span>
+    <span>🔥</span>
+    <span>🌀</span>
+    <span>⚡</span>
+    <span>🎉</span>
+    <span>😎</span>
+    <span>🤩</span>
+    <span>💥</span>
+    <span>🎶</span>
+    <span>👾</span>
+    <span>🌟</span>
+    <span>🌈</span>
+    <span>🦄</span>
+    <span>💃</span>
+    <span>🕺</span>
+    <span>🪐</span>
+    <span>👽</span>
+    <span>✨</span>
+    <span>🎯</span>
+  </div>
 
-    <!-- Added initialization script -->
-    <script>
-        // Enable buttons only when Firebase is ready
-        function enableControls() {
-            document.getElementById('btnOn').disabled = false;
-            document.getElementById('btnOff').disabled = false;
-        }
-    </script>
+  <!-- 🌠 Floating Particles -->
+  <div class="particle-effect">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- 🎮 Login Form -->
+  <div class="login-container">
+    <h1>💡 Lamp Login</h1>
+    <form id="loginForm">
+      <input type="email" placeholder="📧 Email" id="email" required />
+      <input type="password" placeholder="🔒 Password" id="password" required />
+      <button type="submit">Login 🚀</button>
+    </form>
+    <p id="error" class="error"></p>
+    <div id="success-animation" class="success">✅ Access Granted</div>
+  </div>
+
+  <!-- 🔊 Meme Sound on Success -->
+  <audio id="success-sound" src="success-sound.mp3" preload="auto"></audio>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const successMsg = document.getElementById("success-animation");
+    const errorMsg = document.getElementById("error");
+    const successSound = document.getElementById("success-sound");
+
+    successMsg.style.display = "none";
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value.trim();
+
+      if (email === "mugiranezaelisee0@gmail.com" && pass === "lamp.exe") {
+        form.style.display = "none";
+        errorMsg.textContent = "";
+        successMsg.style.display = "block";
+        successMsg.classList.add("success-show");
+
+        // Play the meme sound
+        successSound.play();
+
+        // Show particles
+        const particles = document.querySelectorAll('.particle');
+        particles.forEach((particle, index) => {
+          particle.classList.add('particle-active');
+          particle.style.animationDuration = `${Math.random() * 2 + 2}s`;
+          particle.style.animationDelay = `${Math.random() * 1}s`;
+        });
+
+        // Delay before redirect
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 3000);  // Extended time for particles and animation
+      } else {
+        errorMsg.textContent = "❌ Invalid email or password!";
+      }
+    });
+  </script>
 </body>
 </html>

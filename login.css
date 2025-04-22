@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  body {
+    background: #0f0f0f;
+    color: white;
+    overflow: hidden;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  /* 🌈 EMOJI BACKGROUND (Infinite Chaos Everywhere) */
+  .emoji-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  .emoji-bg span {
+    position: absolute;
+    display: block;
+    font-size: 40px;
+    opacity: 0.1;
+    animation: floatEmoji 10s linear infinite;
+    animation-duration: calc(10s + (random() * 10))s;
+    animation-delay: calc(random() * 5);
+  }
+  
+  /* 🌀 Random Emoji positions with infinite chaos */
+  .emoji-bg span:nth-child(1) { left: 5%; top: 10%; animation-duration: 18s; }
+  .emoji-bg span:nth-child(2) { left: 20%; top: 25%; animation-duration: 20s; }
+  .emoji-bg span:nth-child(3) { left: 40%; top: 40%; animation-duration: 15s; }
+  .emoji-bg span:nth-child(4) { left: 60%; top: 55%; animation-duration: 17s; }
+  .emoji-bg span:nth-child(5) { left: 80%; top: 30%; animation-duration: 19s; }
+  .emoji-bg span:nth-child(6) { left: 95%; top: 60%; animation-duration: 25s; }
+  .emoji-bg span:nth-child(7) { left: 30%; top: 10%; animation-duration: 22s; }
+  .emoji-bg span:nth-child(8) { left: 10%; top: 50%; animation-duration: 24s; }
+  .emoji-bg span:nth-child(9) { left: 50%; top: 70%; animation-duration: 26s; }
+  .emoji-bg span:nth-child(10) { left: 70%; top: 80%; animation-duration: 21s; }
+  .emoji-bg span:nth-child(11) { left: 85%; top: 40%; animation-duration: 23s; }
+  .emoji-bg span:nth-child(12) { left: 60%; top: 20%; animation-duration: 22s; }
+  .emoji-bg span:nth-child(13) { left: 15%; top: 75%; animation-duration: 18s; }
+  .emoji-bg span:nth-child(14) { left: 90%; top: 85%; animation-duration: 25s; }
+  .emoji-bg span:nth-child(15) { left: 25%; top: 50%; animation-duration: 28s; }
+  .emoji-bg span:nth-child(16) { left: 65%; top: 60%; animation-duration: 20s; }
+  .emoji-bg span:nth-child(17) { left: 75%; top: 30%; animation-duration: 21s; }
+  .emoji-bg span:nth-child(18) { left: 40%; top: 90%; animation-duration: 22s; }
+  .emoji-bg span:nth-child(19) { left: 55%; top: 5%; animation-duration: 19s; }
+  .emoji-bg span:nth-child(20) { left: 45%; top: 10%; animation-duration: 20s; }
+  
+  /* 🌀 Infinite Floating Animations */
+  @keyframes floatEmoji {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-100vh) rotate(360deg);
+    }
+  }
+  
+  /* 🌟 Infinite Particles */
+  .particle-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    background-color: #00ff88;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: particle-animation 3s linear infinite;
+  }
+  
+  .particle-active {
+    animation: particle-animation 2s ease-out infinite;
+  }
+  
+  @keyframes particle-animation {
+    0% {
+      transform: translateX(0) translateY(0) scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 0.3;
+      transform: translateX(50px) translateY(50px) scale(1.5);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(100px) translateY(100px) scale(0.5);
+    }
+  }
+  
+  /* 💻 Login Form */
+  .login-container {
+    background: rgba(26, 26, 26, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+  }
+  
+  h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
+  
+  form input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #2a2a2a;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+  }
+  
+  form input:focus {
+    outline: none;
+    box-shadow: 0 0 10px cyan;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: cyan;
+    color: black;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    background: #00ffff;
+    transform: scale(1.05);
+  }
+  
+  .error {
+    margin-top: 15px;
+    color: #ff5555;
+    font-size: 14px;
+  }
+  
+  /* 🤯 Funny success animation */
+  #success-animation {
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #00ff88;
+    display: none;
+    animation: pop-glow 1s ease-out forwards;
+    transform-origin: center;
+  }
+  
+  .success-show {
+    display: block;
+    animation: pop-glow 1s ease-out forwards, spinPop 0.6s ease-out;
+  }
+  
+  @keyframes pop-glow {
+    0% {
+      opacity: 0;
+      transform: scale(0.5) rotate(0deg);
+      text-shadow: none;
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2) rotate(10deg);
+      text-shadow: 0 0 10px #00ff88;
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      text-shadow: 0 0 20px #00ff88;
+    }
+  }
+  
+  @keyframes spinPop {
+    0% {
+      transform: scale(0.6) rotate(0deg);
+    }
+    100% {
+      transform: scale(1) rotate(360deg);
+    }
+  }
+  

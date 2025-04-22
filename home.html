@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Lamp Control</title>
+    <link rel="icon" href="image.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDKs MUST be loaded first -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Our Firebase control script -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="title-container">
+            <img src="image.png" alt="Lamp Icon">
+            <h1>IoT Lamp Control</h1>
+        </div>
+        <p id="subscriptionStatus">Initializing connection...</p>
+        <p id="lampStateDisplay">Lamp State: --</p>
+        <div>
+            <!-- Changed to add disabled state initially -->
+            <button id="btnOn" onclick="controlLamp('ON')" disabled>Turn ON</button>
+            <button id="btnOff" onclick="controlLamp('OFF')" disabled>Turn OFF</button>
+        </div>
+        <br>
+        <h4>By Elisee (eliseemugiraneza1@gmail.com)</h4>
+        <footer>Built with ❤️ for IoT lovers!</footer>
+    </div>
+
+    <!-- Added initialization script -->
+    <script>
+        // Enable buttons only when Firebase is ready
+        function enableControls() {
+            document.getElementById('btnOn').disabled = false;
+            document.getElementById('btnOff').disabled = false;
+        }
+    </script>
+</body>
+</html>
