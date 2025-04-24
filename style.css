@@ -9,6 +9,7 @@
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Light pastel gradient */
+    /*background: linear-gradient(135deg, #c6fd92, #83b9ff, #ffc72d);*/
     height: 100vh;
     color: #333;
     display: flex;

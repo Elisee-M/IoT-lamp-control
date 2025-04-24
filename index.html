@@ -55,6 +55,18 @@
   <!-- 🔊 Meme Sound on Success -->
   <audio id="success-sound" src="success-sound.mp3" preload="auto"></audio>
 
+  <!-- 👤 Info Button with Hover Popup -->
+  <div class="owner-info-wrapper">
+    <button class="info-btn" tabindex="0">ℹ️</button>
+    <div class="info-tooltip">
+      <h4>👨‍💻 Page Owner</h4>
+      <p><strong>Name:</strong> Elisee Mugiraneza</p>
+      <p><strong>Email:</strong> mugiranezaelisee0@gmail.com</p>
+      <p><strong>Phone:</strong> +250798809812</p>
+      <p><strong>Project:</strong> Lamp Control Interface</p>
+    </div>
+  </div>
+
   <script>
     const form = document.getElementById("loginForm");
     const successMsg = document.getElementById("success-animation");
@@ -74,10 +86,8 @@
         successMsg.style.display = "block";
         successMsg.classList.add("success-show");
 
-        // Play the meme sound
         successSound.play();
 
-        // Show particles
         const particles = document.querySelectorAll('.particle');
         particles.forEach((particle, index) => {
           particle.classList.add('particle-active');
@@ -85,10 +95,9 @@
           particle.style.animationDelay = `${Math.random() * 1}s`;
         });
 
-        // Delay before redirect
         setTimeout(() => {
           window.location.href = "home.html";
-        }, 3000);  // Extended time for particles and animation
+        }, 3000);
       } else {
         errorMsg.textContent = "❌ Invalid email or password!";
       }
