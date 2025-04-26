@@ -9,26 +9,10 @@
 <body>
   <!-- 🌌 Floating Emojis Background -->
   <div class="emoji-bg">
-    <span>💡</span>
-    <span>🚀</span>
-    <span>🔥</span>
-    <span>🌀</span>
-    <span>⚡</span>
-    <span>🎉</span>
-    <span>😎</span>
-    <span>🤩</span>
-    <span>💥</span>
-    <span>🎶</span>
-    <span>👾</span>
-    <span>🌟</span>
-    <span>🌈</span>
-    <span>🦄</span>
-    <span>💃</span>
-    <span>🕺</span>
-    <span>🪐</span>
-    <span>👽</span>
-    <span>✨</span>
-    <span>🎯</span>
+    <span>💡</span><span>🚀</span><span>🔥</span><span>🌀</span><span>⚡</span>
+    <span>🎉</span><span>😎</span><span>🤩</span><span>💥</span><span>🎶</span>
+    <span>👾</span><span>🌟</span><span>🌈</span><span>🦄</span><span>💃</span>
+    <span>🕺</span><span>🪐</span><span>👽</span><span>✨</span><span>🎯</span>
   </div>
 
   <!-- 🌠 Floating Particles -->
@@ -48,6 +32,10 @@
       <input type="password" placeholder="🔒 Password" id="password" required />
       <button type="submit">Login 🚀</button>
     </form>
+
+    <!-- Loader inside box, centered at bottom -->
+    <div id="loader" class="loader" style="display: none;"></div>
+
     <p id="error" class="error"></p>
     <div id="success-animation" class="success">✅ Access Granted</div>
   </div>
@@ -67,39 +55,71 @@
     </div>
   </div>
 
+  <!-- 🚀 Login Logic -->
   <script>
     const form = document.getElementById("loginForm");
     const successMsg = document.getElementById("success-animation");
     const errorMsg = document.getElementById("error");
     const successSound = document.getElementById("success-sound");
+    const loader = document.getElementById("loader");
 
     successMsg.style.display = "none";
 
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
       const email = document.getElementById("email").value.trim();
       const pass = document.getElementById("password").value.trim();
 
-      if (email === "mugiranezaelisee0@gmail.com" && pass === "lamp.exe") {
-        form.style.display = "none";
-        errorMsg.textContent = "";
-        successMsg.style.display = "block";
-        successMsg.classList.add("success-show");
+      if (!email || !pass) {
+        errorMsg.textContent = "❌ Please fill in all fields!";
+        return;
+      }
 
-        successSound.play();
+      loader.style.display = "block"; // Show loader
 
-        const particles = document.querySelectorAll('.particle');
-        particles.forEach((particle, index) => {
-          particle.classList.add('particle-active');
-          particle.style.animationDuration = `${Math.random() * 2 + 2}s`;
-          particle.style.animationDelay = `${Math.random() * 1}s`;
-        });
+      try {
+        const response = await fetch("https://lamp-control-81d5d-default-rtdb.firebaseio.com/users.json");
+        const data = await response.json();
+        let found = false;
+        let isAdmin = false;
 
-        setTimeout(() => {
-          window.location.href = "home.html";
-        }, 3000);
-      } else {
-        errorMsg.textContent = "❌ Invalid email or password!";
+        for (const key in data) {
+          if (data[key].email === email && data[key].password === pass) {
+            found = true;
+            if (data[key].email === "mugiranezaelisee0@gmail.com") {
+              isAdmin = true;
+            }
+            break;
+          }
+        }
+
+        loader.style.display = "none"; // Hide loader
+
+        if (found) {
+          form.style.display = "none";
+          errorMsg.textContent = "";
+          successMsg.style.display = "block";
+          successMsg.classList.add("success-show");
+
+          successSound.play();
+
+          const particles = document.querySelectorAll('.particle');
+          particles.forEach((particle) => {
+            particle.classList.add('particle-active');
+            particle.style.animationDuration = `${Math.random() * 2 + 2}s`;
+            particle.style.animationDelay = `${Math.random()}s`;
+          });
+
+          setTimeout(() => {
+            window.location.href = isAdmin ? "change.html" : "home.html";
+          }, 3000);
+        } else {
+          errorMsg.textContent = "❌ Invalid email or password!";
+        }
+      } catch (error) {
+        loader.style.display = "none";
+        errorMsg.textContent = "⚠️ Error connecting to Firebase.";
+        console.error(error);
       }
     });
   </script>

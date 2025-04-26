@@ -52,7 +52,7 @@ try {
         }
         lampRef.set(state)
             .then(() => console.log("State update sent:", state))
-            .catch(error => {
+            .catch(error => { 
                 console.error("Update failed:", error);
                 subscriptionStatus.textContent = "Update failed - retrying";
                 setTimeout(() => controlLamp(state), 1000);
