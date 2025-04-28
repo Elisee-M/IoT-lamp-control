@@ -1,42 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IoT Lamp Control</title>
-    <link rel="icon" href="image.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
-    <!-- Firebase SDKs MUST be loaded first -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <!-- Our Firebase control script -->
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IoT Lamp Control</title>
+  <link rel="icon" href="image.png" type="image/png">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <!-- Main App Script -->
+  <script src="script.js" defer></script>
 </head>
+
 <body>
-    <div class="container">
-        <div class="title-container">
-            <img src="image.png" alt="Lamp Icon">
-            <h1>IoT Lamp Control</h1>
-        </div>
-        <p id="subscriptionStatus">Initializing connection...</p>
-        <p id="lampStateDisplay">Lamp State: --</p>
-        <div>
-            <!-- Changed to add disabled state initially -->
-            <button id="btnOn" onclick="controlLamp('ON')" disabled>Turn ON</button>
-            <button id="btnOff" onclick="controlLamp('OFF')" disabled>Turn OFF</button>
-        </div>
-        <br>
-        <h4>By Elisee (eliseemugiraneza1@gmail.com)</h4>
-        <footer>Built with ❤️ for IoT lovers!</footer>
+  <!-- Top-Right Dropdown -->
+  <div class="dropdown">
+    <button class="dropbtn">
+      <i class="fas fa-user-cog"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#" onclick="changePassword()">🔑 Change Password</a>
+      <a href="#" onclick="logout()">🚪 Logout</a>
+      <a href="#" onclick="showInfo()">ℹ️ Info</a>
+    </div>
+  </div>
+
+  <!-- Info Modal -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeInfo()">&times;</span>
+      <h4>👨‍💻 Page Owner</h4>
+      <p><strong>Name:</strong> Elisee Mugiraneza</p>
+      <p><strong>Email:</strong> mugiranezaelisee0@gmail.com</p>
+      <p><strong>Phone:</strong> +250798809812</p>
+      <p><strong>Project:</strong> Lamp Control</p>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="title-container">
+      <img src="image.png" alt="Lamp Icon">
+      <h1>IoT Lamp Control</h1>
     </div>
 
-    <!-- Added initialization script -->
-    <script>
-        // Enable buttons only when Firebase is ready
-        function enableControls() {
-            document.getElementById('btnOn').disabled = false;
-            document.getElementById('btnOff').disabled = false;
-        }
-    </script>
+    <p id="subscriptionStatus">Initializing connection...</p>
+    <p id="lampStateDisplay">Lamp State: --</p>
+
+    <div>
+      <button id="btnOn" onclick="controlLamp('ON')" disabled>Turn ON</button>
+      <button id="btnOff" onclick="controlLamp('OFF')" disabled>Turn OFF</button>
+    </div>
+
+    <br>
+    <h4>By Elisee (eliseemugiraneza1@gmail.com)</h4>
+    <footer>Built with ❤️ for IoT lovers!</footer>
+  </div>
+
+  <!-- Enable Controls Script -->
+  <script>
+    function enableControls() {
+      document.getElementById('btnOn').disabled = false;
+      document.getElementById('btnOff').disabled = false;
+    }
+
+    window.onload = function() {
+      // Check if the user is logged in using localStorage
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+      if (!isLoggedIn) {
+        // If the user is not logged in, redirect them to the login page
+        window.location.href = "index.html";
+      }
+    };
+  </script>
 </body>
 </html>

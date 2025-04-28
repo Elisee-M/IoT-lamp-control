@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .modal-content input[type="password"] {
+      width: 80%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .show-btn {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+    #globalShowBtn {
+      margin-bottom: 15px;
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+  <h2>User Table</h2>
+  <button id="globalShowBtn" onclick="showAdminPrompt()">🔐 Show Passwords</button>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Admin Password Prompt Modal -->
+  <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeAdminModal()">&times;</span>
+      <h3>🔐 Admin Password Required</h3>
+      <input type="password" id="adminPwdInput" placeholder="Enter admin password">
+      <button onclick="verifyAdminPassword()">Show Passwords</button>
+    </div>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      databaseURL: "https://lamp-control-81d5d-default-rtdb.firebaseio.com/"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const dbRef = firebase.database().ref("users");
+    let showPasswords = false;
+
+    function renderTable(show) {
+      dbRef.once("value").then(snapshot => {
+        const tbody = document.querySelector("#userTable tbody");
+        tbody.innerHTML = "";
+        snapshot.forEach(childSnapshot => {
+          const user = childSnapshot.val();
+          const key = childSnapshot.key;
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${user.username || '-'}</td>
+            <td>${user.email || '-'}</td>
+            <td>${show ? user.password : '••••••••'}</td>
+            <td><button class="delete-btn" onclick="deleteUser('${key}')">Delete</button></td>
+          `;
+
+          tbody.appendChild(row);
+        });
+      });
+    }
+
+    renderTable(false);
+
+    function showAdminPrompt() {
+      document.getElementById("adminModal").style.display = "block";
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").style.display = "none";
+    }
+
+    function verifyAdminPassword() {
+      const input = document.getElementById("adminPwdInput").value;
+      const adminEmail = "mugiranezaelisee0@gmail.com";
+
+      dbRef.once("value")
+        .then(snapshot => {
+          let correctPassword = null;
+
+          snapshot.forEach(childSnapshot => {
+            const user = childSnapshot.val();
+            if (user.email === adminEmail) {
+              correctPassword = user.password;
+            }
+          });
+
+          if (input === correctPassword) {
+            renderTable(true);
+            alert("✅ Passwords revealed");
+            closeAdminModal();
+          } else {
+            alert("❌ Incorrect admin password!");
+          }
+        })
+        .catch(error => {
+          console.error("Error verifying admin password:", error);
+          alert("⚠️ Error checking admin credentials");
+        });
+    }
+
+    function deleteUser(userKey) {
+      if (confirm("Are you sure you want to delete this user?")) {
+        firebase.database().ref("users/" + userKey).remove()
+          .then(() => {
+            alert("🗑️ User deleted successfully");
+            renderTable(showPasswords);
+          })
+          .catch(error => {
+            console.error("Error deleting user:", error);
+            alert("❌ Failed to delete user");
+          });
+      }
+    }
+
+    window.onclick = function (event) {
+      const modal = document.getElementById("adminModal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+</html>

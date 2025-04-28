@@ -8,8 +8,7 @@
 /* Body with a clean, modern gradient background */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Light pastel gradient */
-    /*background: linear-gradient(135deg, #c6fd92, #83b9ff, #ffc72d);*/
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
     height: 100vh;
     color: #333;
     display: flex;
@@ -20,12 +19,12 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-/* Create a container with the border to simulate fieldset */
+/* Container styling */
 .container {
     width: 80%;
     max-width: 600px;
     padding: 20px;
-    border: 2px solid #5c6bc0; /* Border to simulate fieldset */
+    border: 2px solid #5c6bc0;
     border-radius: 15px;
     position: relative;
     background-color: #d0dee1;
@@ -41,17 +40,17 @@ body {
 /* Title and image container */
 .title-container {
     display: flex;
-    align-items: center; /* Vertically align title and image */
-    justify-content: center; /* Center the content */
+    align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
 /* Image styling */
 .title-container img {
-    width: 50px; /* Set image width */
-    height: 50px; /* Set image height */
-    margin-right: 15px; /* Space between image and title */
-    border-radius: 50%; /* Make the image circular */
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    border-radius: 50%;
 }
 
 /* Heading */
@@ -78,9 +77,9 @@ h1 {
     margin-bottom: 40px;
 }
 
-/* Button Styling */
+/* Main buttons */
 button {
-    background-color: #5c6bc0; /* Soft blue color */
+    background-color: #5c6bc0;
     border: none;
     color: white;
     padding: 15px 40px;
@@ -92,21 +91,131 @@ button {
     margin-left: 15px;
 }
 
-/* Hover effect for buttons */
 button:hover {
-    background-color: #3f51b5; /* Darker blue on hover */
+    background-color: #3f51b5;
     transform: scale(1.1);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Additional small button */
 button:first-of-type {
     margin-left: 0;
 }
 
-/* Footer / Note (optional) */
+/* Footer / Note */
 footer {
     font-size: 0.9em;
     color: #888;
     margin-top: 50px;
+}
+
+/* ========== Dropdown User Menu ========== */
+/* Adjust dropdown to not overlap and float cleanly */
+.dropdown {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    z-index: 1000;
+}
+
+/* Icon-only button styles */
+.dropbtn {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1.8em;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.dropbtn:hover {
+    transform: scale(1.2);
+    color: #5c6bc0;
+}
+
+
+/* Dropdown menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px; /* Separates menu from icon */
+    background-color: #ffffff;
+    min-width: 190px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    padding: 5px 0;
+}
+
+
+/* Show menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Links inside dropdown */
+.dropdown-content a {
+    color: #333;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 1em;
+    transition: background 0.2s ease;
+}
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 25px 30px;
+    border: 1px solid #ccc;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: left;
+    line-height: 1.6;
+}
+
+
+.modal-content h4 {
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    color: #2c3e50;
+}
+
+
+.modal-content p {
+    margin: 6px 0;
+    font-size: 1em;
+    color: #555;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
 }

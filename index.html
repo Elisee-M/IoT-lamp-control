@@ -110,8 +110,12 @@
             particle.style.animationDelay = `${Math.random()}s`;
           });
 
+          // Set login status in localStorage
+          localStorage.setItem("isLoggedIn", true);
+
+          // Redirect to the appropriate page
           setTimeout(() => {
-            window.location.href = isAdmin ? "change.html" : "home.html";
+            window.location.href = isAdmin ? "admin.html" : "home.html";
           }, 3000);
         } else {
           errorMsg.textContent = "❌ Invalid email or password!";
