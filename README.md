@@ -26,5 +26,5 @@ Welcome to the **ultimate lazy-tech** invention of the year — an ESP8266 + Web
 | 🧠 Brain cells      | At least 2 neurons firing ⚡ |
 
 ---
-
+URL: https://lampcontrol1.netlify.app/
 
